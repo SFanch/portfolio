@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Navbar } from "@/components/Navbar";
+import { MobileDock } from "@/components/MobileDock";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,10 +35,15 @@ export default function RootLayout({
           geistMono.variable
         )}
       >
-        {/* Nous ajouterons la Navbar ici plus tard */}
-        <main className="relative flex flex-col min-h-screen">
-            {children}
+        <Navbar />        {/* <--- AJOUT DESKTOP */}
+        <main className="relative flex flex-col min-h-screen pt-20 pb-24 md:pb-0 px-4 max-w-7xl mx-auto w-full"> 
+          {/* pt-20 : Pour ne pas que le contenu soit caché sous la navbar desktop 
+             pb-24 : Pour ne pas que le contenu soit caché sous le dock mobile
+             max-w-7xl + mx-auto : Pour centrer le site sur les grands écrans
+          */}
+          {children}
         </main>
+        <MobileDock />    {/* <--- AJOUT MOBILE */}
       </body>
     </html>
   );
